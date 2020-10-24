@@ -8,7 +8,10 @@ import com.microsoft.azure.functions.*;
  * Azure Function 컴포넌트.
  *  1. Function Name
  *  2. Trigger
- *      - HttpTrigger -> auth level, http methods, route
+ *      HttpTrigger
+ *          구성요소 -> auth level, http methods, route
+ *          사용처 -> webhook, rest api
+ *
  *  3. Logger (ExecutionContext)
  *
  * 실행 -
@@ -17,6 +20,8 @@ import com.microsoft.azure.functions.*;
  *
  *  azure-functions-core-tools 3.0 -> 자바 지원 안함.
  *
+ * local.settings.json (로컬 환경) = app settings (배포 환경)
+ *  배포 -> 매뉴얼 디플로이, 깃, zip (with cli)
  */
 public class ServerlessFunction1 {
 

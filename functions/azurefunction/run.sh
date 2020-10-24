@@ -1,0 +1,1 @@
+mvn clean package -s ~/.m2/default-settings.xml && mvn azure-functions:run -s ~/.m2/default-settings.xml
