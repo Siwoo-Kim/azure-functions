@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "proxyHomePage": {
+      "matchCondition": {
+        "methods": ["GET"],
+        "route": "/"
+      },
+      "backendUri": "https://siwooblob.blob.core.windows.net/webcontent/index.html"
+    },
+    "proxyContent": {
+      "matchCondition": {
+        "methods": ["GET"],
+        "route": "/content/{*rest}"
+      },
+      "backendUri": "https://siwooblob.blob.core.windows.net/webcontent/content/{rest}"
+    },
+    "proxy1": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/api/{test}"
+      },
+      "backendUri": "https://<AnotherApp>.azurewebsites.net/api/<FunctionName>"
+    }
+  }
+}

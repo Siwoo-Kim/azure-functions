@@ -22,6 +22,13 @@ import com.microsoft.azure.functions.*;
  *
  * local.settings.json (로컬 환경) = app settings (배포 환경)
  *  배포 -> 매뉴얼 디플로이, 깃, zip (with cli)
+ *
+ *  Azure Functions Proxies
+ *      -> 요청, 응답 http 가로채 destination 을 변경.
+ *      -> proxies.json
+ *      tip -> http 요청을 가로채 blob storage 에 있는 index.html 로 포인팅 가능.
+ *
+ *
  */
 public class ServerlessFunction1 {
 

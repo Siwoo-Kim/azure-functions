@@ -25,10 +25,32 @@ import com.microsoft.azure.functions.*;
  *  connection => 커넥션. local.settings.json 에 정의
  *
  *  ==> 안됨 (클래스 디자인 문제인듯) => 예외도 안던짐..
+ *
+ *  보안.
+ *      - HttpRequestMessage 을 이용한 bearer 토큰 인증.
+ *      - Function key, Host key 을 이용한 보안 인증.
+ *      - Authentication Provider feature (3자 인증) 이용.
+ *
 */
 public class ToDoFunction {
 
     private final ResourceManager resourceManager = ResourceManager.INSTANCE;
+
+    @FunctionName("todocreate2")
+    public HttpResponseMessage create2(
+            @HttpTrigger(name = "req",
+                    methods = {HttpMethod.POST},
+                    route = "todo2/create",
+                    authLevel = AuthorizationLevel.FUNCTION)
+                    HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) throws JsonProcessingException {
+        context.getLogger().info("TODO create.");
+        ToDo toDo = resourceManager.getObjectMapper().readValue(request.getBody().orElseThrow(RuntimeException::new), ToDo.class);
+        context.getLogger().info(toDo.toString());
+        resourceManager.getToDoRepository().save(toDo);
+        context.getLogger().info("TODO create." + toDo);
+        return request.createResponseBuilder(HttpStatus.CREATED).build();
+    }
 
     @FunctionName("todocreate")
     public HttpResponseMessage create(
